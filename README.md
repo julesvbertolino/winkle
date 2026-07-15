@@ -1,79 +1,123 @@
 <div align="center">
 
-<img src="assets/icon-1024.png" width="128" alt="Winkle" />
+<img src="assets/icon-1024.png" width="120" alt="Winkle" />
 
 # Winkle
 
-**App macOS de barre de menus, gratuite et open source, qui automatise la règle 20-20-20 pour reposer tes yeux — sans te harceler.**
+**Rest your eyes, without even thinking about it.**
 
-Toutes les 20 minutes, regarder à ~6 mètres pendant 20 secondes, pour réduire la fatigue oculaire.
+A free, privacy-first macOS menu bar app that automates the 20-20-20 rule — so you actually stick to it.
 
-![Platform](https://img.shields.io/badge/macOS-13%2B-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Swift](https://img.shields.io/badge/Swift-5.9%2B-orange)
+<a href="#features">Features</a> •
+<a href="#install">Install</a> •
+<a href="#privacy-first">Privacy</a> •
+<a href="#contributing">Contributing</a>
+
+[![Platform](https://img.shields.io/badge/macOS-13%2B-blue)](https://github.com/julesvbertolino/winkle)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub release](https://img.shields.io/github/release/julesvbertolino/winkle.svg)](https://github.com/julesvbertolino/winkle/releases)
 
 </div>
 
-**Principe : l'outil sert l'utilisateur, il ne le harcèle pas.**
-Minimalisme, calme, zéro culpabilisation.
+---
 
-## Fonctionnalités
+Staring at a screen all day is hard on your eyes. Optometrists recommend the **20-20-20 rule**: every 20 minutes, look at something about 20 feet (6 m) away for 20 seconds. It genuinely works — the problem is nobody remembers to do it.
 
-- **Détection intelligente de l'usage réel** — le compteur ne tourne que quand
-  tu utilises vraiment clavier ou souris ; si tu t'absentes (90 s par défaut),
-  Winkle considère que tes yeux se reposent déjà et repart de zéro.
-- **Ne dérange jamais au mauvais moment** — suspension automatique en visio
-  (caméra active), en vidéo plein écran, quand « Ne pas déranger » est actif,
-  ou dans les apps que tu whitelist. Suspension manuelle 1 h / 2 h / illimitée.
-- **Invitation douce** — pré-alerte 20 s avant, overlay apaisant (fond bleuté
-  qui suit le curseur), boutons « Reporter · +5 min » et « Ignorer » sans limite
-  ni culpabilisation. Mode strict optionnel pour les motivés.
-- **Presets** — 20-20-20 (défaut) · Intense (15 min / 20 s) · Détendu
-  (30 min / 30 s) · Custom.
-- **Privacy-first** — aucune donnée ne quitte la machine, zéro tracking.
-  La détection d'activité lit uniquement des délais d'inactivité (jamais le
-  contenu des frappes) ; la détection visio lit un statut caméra (jamais le flux).
+Winkle does the remembering for you. It lives in your menu bar, quietly tracks your *real* screen time, and gently nudges you to look away at the right moment. Then it gets out of your way. No accounts, no tracking, nothing ever leaves your Mac.
 
-## Installation
+---
 
-1. Télécharge le `.dmg` depuis la [page des Releases](../../releases/latest).
-2. Ouvre-le, glisse **Winkle** dans **Applications**.
-3. Premier lancement : **clic droit sur l'app → Ouvrir** (l'app est signée mais
-   pas encore notariée par Apple, donc Gatekeeper demande cette confirmation une
-   seule fois).
+## Features
 
-Ensuite Winkle vit dans la barre de menus, sans icône dans le Dock. Un onboarding
-te propose ton rythme au premier démarrage.
+### 👀 It knows when you're actually working
 
-## Développement
+Winkle only counts time when you're really using your keyboard or mouse. Step away for a coffee and it notices your eyes are already resting — the timer quietly resets. No guilt, no breaks you didn't need.
+
+### 🎥 It never interrupts at the wrong moment
+
+On a video call, watching something fullscreen, or in Do Not Disturb? Winkle steps aside automatically. You can also whitelist any app, or suspend it by hand for an hour, two, or until you switch it back on.
+
+### 🫧 A break that feels calm, not naggy
+
+When it's time, a soft periwinkle overlay drifts in with a gentle countdown. A 20-second pre-alert lets you finish your sentence first. Snooze for 5 minutes as often as you like, or skip it entirely — your call. Prefer discipline? Strict mode makes the break unskippable.
+
+### ⚙️ Your rhythm, your rules
+
+Pick a preset — **Balanced** (20 min), **Intense** (15 min) or **Relaxed** (30 min) — or set your own. Overlay, notification, or both. Light or dark. Français or English. Launch at login. All optional, all yours.
+
+---
+
+## Privacy First
+
+Your habits are yours. Winkle is built so none of them ever leave your machine.
+
+- ✅ 100% on-device — no servers, no accounts, no analytics
+- ✅ Activity detection reads only *idle time*, never your keystrokes
+- ✅ Camera detection reads a status flag, never the video feed
+- ✅ Fully open source — read every line right here
+
+Don't take my word for it — check the code yourself.
+
+---
+
+## Install
+
+1. Download the latest `.dmg` from the [Releases page](../../releases/latest).
+2. Open it and drag **Winkle** into **Applications**.
+3. First launch: **right-click the app → Open** (Winkle is signed but not yet Apple-notarized, so macOS asks for confirmation once).
+
+Winkle then lives in your menu bar — no Dock icon. A short onboarding helps you pick your rhythm.
+
+Requires **macOS 13 or later** · universal (Apple Silicon + Intel).
+
+## Build from source
+
+No dependencies — just clone and run:
 
 ```bash
-make run    # binaire nu (dev rapide ; ni notifications ni login item)
-make open   # construit et lance build/Winkle.app (expérience complète)
-make dmg    # construit build/Winkle-x.y.z.dmg partageable
-make icon   # régénère l'icône .icns
+make open   # build and launch Winkle.app (full experience)
+make dmg    # build a shareable .dmg
+make run    # bare binary for quick dev (no notifications / login item)
 ```
 
-> `make run` n'a ni notifications ni lancement au démarrage : ces API exigent
-> un vrai bundle `.app`. Elles fonctionnent dès `make open` / le DMG installé.
+Swift 5.9+ · SwiftUI · macOS 13+.
 
-Swift 5.9+ · SwiftUI · macOS 13+ · aucune dépendance externe.
+<details>
+<summary>How the code is organized</summary>
 
-## Structure
-
-| Fichier | Rôle |
+| File | Role |
 |---|---|
-| `BreakEngine.swift` | Machine à états du cycle (actif / repos naturel / suspendu, pause) |
-| `ActivityMonitor.swift` | Inactivité clavier & souris via CGEventSource |
-| `SuspensionMonitor.swift` | Règles "ne jamais déranger" : visio, plein écran, whitelist, Focus |
-| `OverlayController.swift` | Fenêtres d'overlay par écran, fondus |
-| `Views/` | Overlay, réglages, onboarding, style partagé |
+| `BreakEngine.swift` | The cycle's state machine (active / natural rest / suspended, and the break itself) |
+| `ActivityMonitor.swift` | Keyboard & mouse idle time via CGEventSource |
+| `SuspensionMonitor.swift` | The "never interrupt" rules: calls, fullscreen, whitelist, Focus |
+| `OverlayController.swift` | Per-screen break overlays, fade in/out |
+| `Views/` | Overlay, settings, onboarding, shared style |
 
-## Contribuer
+</details>
 
-Les retours, bugs et idées sont bienvenus — ouvre une
-[issue](../../issues) ou une pull request. Le projet n'a aucune dépendance
-externe : `git clone`, puis `make open` suffit pour lancer ta version.
+---
 
-## Licence
+## Contributing
 
-MIT — gratuit, pour toujours. Si Winkle t'aide, tu peux
-[m'offrir un café ☕](https://buymeacoffee.com/julesbertolino).
+Feedback, bugs and ideas are very welcome.
+
+**Found a bug?** [Open an issue](../../issues/new) with what happened, what you expected, how to reproduce it, and your macOS version.
+
+**Have an idea?** [Open an issue](../../issues/new) describing the feature and why it'd help.
+
+**Want to code?**
+
+1. Fork the repo
+2. Create a branch: `git checkout -b feature/your-feature`
+3. Make your change and test it
+4. Open a pull request
+
+I'll review PRs as soon as I can — please keep them focused.
+
+---
+
+## License
+
+MIT — fork it, change it, ship it however you want. If Winkle helps your eyes, you can [buy me a coffee ☕](https://buymeacoffee.com/julesbertolino).
+
+See [LICENSE](LICENSE) for details.
